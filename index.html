@@ -1,0 +1,1484 @@
+<title>Comité d'écoute SAWARA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap">
+
+<style>
+:root {
+  --bg:        #F6F5F2;
+  --surface:   #FFFFFF;
+  --border:    #E3E0D8;
+  --navy:      #0F1F3D;
+  --navy-mid:  #1A3260;
+  --amber:     #E8900A;
+  --amber-dim: #FDF3E0;
+  --fg:        #1A1A1A;
+  --muted:     #6B6560;
+  --danger:    #C0392B;
+  --success:   #1A7A4A;
+  --radius:    10px;
+  --font-h:    'Sora', system-ui, sans-serif;
+  --font-b:    'DM Sans', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:        #0D1117;
+    --surface:   #161C26;
+    --border:    #2A3347;
+    --navy:      #C8D8F5;
+    --navy-mid:  #8FAEE0;
+    --amber:     #F0A830;
+    --amber-dim: #2A2010;
+    --fg:        #E8E6E0;
+    --muted:     #8A8580;
+    --danger:    #E05A4A;
+    --success:   #4ABD7A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:        #0D1117;
+  --surface:   #161C26;
+  --border:    #2A3347;
+  --navy:      #C8D8F5;
+  --navy-mid:  #8FAEE0;
+  --amber:     #F0A830;
+  --amber-dim: #2A2010;
+  --fg:        #E8E6E0;
+  --muted:     #8A8580;
+  --danger:    #E05A4A;
+  --success:   #4ABD7A;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-b);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 15px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* ─── Header band ─────────────────────────────────────────────────────── */
+.header-band {
+  background: var(--navy);
+  color: #fff;
+  padding: 3.5rem max(24px, env(safe-area-inset-left, 0px)) 3rem;
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  position: relative;
+  overflow: hidden;
+}
+.header-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 40px,
+    rgba(255,255,255,.025) 40px,
+    rgba(255,255,255,.025) 41px
+  );
+  pointer-events: none;
+}
+.header-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+}
+.orgs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.org-badge {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  color: rgba(255,255,255,.9);
+  font-family: var(--font-h);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .3rem .75rem;
+  border-radius: 4px;
+}
+.org-sep { color: rgba(255,255,255,.3); font-size: 18px; }
+
+.eyebrow {
+  font-family: var(--font-h);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: .6rem;
+}
+h1 {
+  font-family: var(--font-h);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  text-wrap: balance;
+  margin-bottom: 1rem;
+}
+.header-desc {
+  color: rgba(255,255,255,.75);
+  font-size: .95rem;
+  max-width: 560px;
+  line-height: 1.65;
+}
+.deadline-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 1.4rem;
+  background: var(--amber);
+  color: #fff;
+  font-family: var(--font-h);
+  font-size: .8rem;
+  font-weight: 700;
+  padding: .4rem 1rem;
+  border-radius: 100px;
+}
+.deadline-pill svg { flex-shrink: 0; }
+
+/* ─── Info strip ──────────────────────────────────────────────────────── */
+.info-strip {
+  background: var(--amber-dim);
+  border-bottom: 2px solid var(--amber);
+  padding: 1rem max(24px, env(safe-area-inset-left, 0px));
+  margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  margin-right: calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+}
+.info-strip-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 2rem;
+}
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--fg);
+}
+.info-item svg { color: var(--amber); flex-shrink: 0; }
+
+/* ─── Main layout ─────────────────────────────────────────────────────── */
+.main {
+  max-width: 680px;
+  margin: 0 auto;
+  padding-block: 2.5rem;
+}
+
+/* ─── Progress ────────────────────────────────────────────────────────── */
+.progress-wrap {
+  margin-bottom: 2rem;
+}
+.steps-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: .6rem;
+  font-size: 0;
+}
+.step-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--border);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-h);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  transition: all .25s;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.step-dot.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+.step-dot.done {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  transition: background .25s;
+}
+.step-line.done { background: var(--success); }
+.steps-labels {
+  display: flex;
+  justify-content: space-between;
+}
+.step-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  text-align: center;
+  width: 28px;
+}
+.step-label.active { color: var(--navy); }
+.step-label.done { color: var(--success); }
+
+/* ─── Cards ───────────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  margin-bottom: 1.25rem;
+  display: none;
+}
+.card.visible { display: block; }
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+.card-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--amber-dim);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--amber);
+}
+.card-title {
+  font-family: var(--font-h);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: .2rem;
+}
+.card-subtitle {
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+/* ─── Form controls ───────────────────────────────────────────────────── */
+.field { margin-bottom: 1.25rem; }
+.field:last-child { margin-bottom: 0; }
+
+label {
+  display: block;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--fg);
+  margin-bottom: .4rem;
+}
+label .req { color: var(--amber); margin-left: 2px; }
+label .hint { font-weight: 400; color: var(--muted); font-size: .75rem; letter-spacing: 0; }
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  padding: .65rem .9rem;
+  font-family: var(--font-b);
+  font-size: .9rem;
+  color: var(--fg);
+  transition: border-color .2s, box-shadow .2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(232,144,10,.15);
+}
+input.error, textarea.error, select.error {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(192,57,43,.1);
+}
+textarea { resize: vertical; min-height: 100px; }
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .9rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.field-error {
+  font-size: .75rem;
+  color: var(--danger);
+  margin-top: .3rem;
+  display: none;
+}
+.field-error.show { display: block; }
+
+/* Checkboxes */
+.check-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: .5rem;
+}
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: .55rem .8rem;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  user-select: none;
+}
+.check-item:has(input:checked) {
+  border-color: var(--amber);
+  background: var(--amber-dim);
+}
+.check-item input { display: none; }
+.check-box {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s;
+  background: var(--surface);
+}
+.check-item:has(input:checked) .check-box {
+  background: var(--amber);
+  border-color: var(--amber);
+}
+.check-box svg { opacity: 0; transition: opacity .1s; }
+.check-item:has(input:checked) .check-box svg { opacity: 1; }
+.check-text { font-size: .85rem; }
+
+/* Radios */
+.radio-stack { display: flex; flex-direction: column; gap: .4rem; }
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: .6rem .9rem;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  user-select: none;
+}
+.radio-item:has(input:checked) {
+  border-color: var(--amber);
+  background: var(--amber-dim);
+}
+.radio-item input { display: none; }
+.radio-dot {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .15s;
+  background: var(--surface);
+}
+.radio-item:has(input:checked) .radio-dot {
+  border-color: var(--amber);
+}
+.radio-inner {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--amber);
+  transform: scale(0);
+  transition: transform .15s;
+}
+.radio-item:has(input:checked) .radio-inner { transform: scale(1); }
+.radio-text { font-size: .85rem; }
+
+/* Consent cards */
+.consent-card {
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: .75rem;
+  transition: border-color .15s, background .15s;
+}
+.consent-card:has(input[value="Oui"]:checked) {
+  border-color: var(--success);
+  background: rgba(26,122,74,.04);
+}
+.consent-label {
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--fg);
+  margin-bottom: .6rem;
+  line-height: 1.5;
+}
+.consent-opts { display: flex; gap: .6rem; }
+.consent-opt {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: .35rem .75rem;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: .82rem;
+  font-weight: 600;
+  user-select: none;
+  transition: all .15s;
+}
+.consent-opt input { display: none; }
+.consent-opt:has(input:checked) {
+  border-color: var(--amber);
+  background: var(--amber);
+  color: #fff;
+}
+
+/* ─── Navigation buttons ──────────────────────────────────────────────── */
+.nav-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: space-between;
+}
+.btn {
+  font-family: var(--font-h);
+  font-size: .88rem;
+  font-weight: 700;
+  padding: .75rem 1.75rem;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  transition: opacity .15s, transform .1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.btn:active { transform: scale(.97); }
+.btn-primary {
+  background: var(--navy);
+  color: #fff;
+}
+.btn-primary:hover { opacity: .88; }
+.btn-secondary {
+  background: var(--bg);
+  color: var(--fg);
+  border: 1.5px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--navy-mid); }
+.btn-submit {
+  background: var(--amber);
+  color: #fff;
+  flex: 1;
+}
+.btn-submit:hover { opacity: .88; }
+.btn-submit:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ─── Success screen ──────────────────────────────────────────────────── */
+#success-screen {
+  display: none;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+#success-screen.visible { display: block; }
+.success-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(26,122,74,.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--success);
+}
+.success-title {
+  font-family: var(--font-h);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--fg);
+  margin-bottom: .75rem;
+  text-wrap: balance;
+}
+.success-text {
+  font-size: .95rem;
+  color: var(--muted);
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+.success-detail {
+  margin-top: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: left;
+}
+.success-detail p { font-size: .85rem; color: var(--muted); }
+.success-detail p + p { margin-top: .5rem; }
+.success-detail strong { color: var(--fg); }
+
+/* ─── Footer ──────────────────────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 1.5rem 0 2rem;
+  font-size: .75rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   ADMIN DASHBOARD
+   ════════════════════════════════════════════════════════════════════════ */
+#admin-view {
+  display: none;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+#admin-view.visible { display: block; }
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.admin-title {
+  font-family: var(--font-h);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--fg);
+}
+.admin-subtitle { font-size: .85rem; color: var(--muted); margin-top: .2rem; }
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.stat-value {
+  font-family: var(--font-h);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: .3rem;
+}
+.stat-label {
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+.chart-title {
+  font-family: var(--font-h);
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 1.25rem;
+}
+.bar-item {
+  margin-bottom: .75rem;
+}
+.bar-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: .3rem;
+}
+.bar-label {
+  font-size: .82rem;
+  color: var(--fg);
+  font-weight: 500;
+}
+.bar-count {
+  font-family: var(--font-h);
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+.bar-track {
+  height: 8px;
+  background: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: var(--amber);
+  border-radius: 100px;
+  transition: width .6s cubic-bezier(.4,0,.2,1);
+}
+.bar-fill.navy { background: var(--navy); }
+.bar-fill.success { background: var(--success); }
+.bar-fill.danger { background: var(--danger); }
+
+.admin-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+}
+.admin-empty svg { margin-bottom: 1rem; color: var(--border); }
+
+.admin-loading {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* Responses table */
+.responses-wrap {
+  margin-top: 2rem;
+}
+.responses-title {
+  font-family: var(--font-h);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin-bottom: 1rem;
+}
+.response-row {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: .75rem;
+  font-size: .83rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: .5rem 1rem;
+  align-items: center;
+}
+@media (max-width: 600px) {
+  .response-row { grid-template-columns: 1fr 1fr; }
+}
+.resp-name { font-weight: 700; color: var(--fg); }
+.resp-detail { color: var(--muted); }
+.resp-badge {
+  display: inline-block;
+  padding: .15rem .5rem;
+  border-radius: 4px;
+  font-size: .75rem;
+  font-weight: 600;
+  background: var(--amber-dim);
+  color: var(--amber);
+}
+.resp-date { font-size: .75rem; color: var(--muted); }
+
+.db-notice {
+  background: var(--amber-dim);
+  border: 1px solid var(--amber);
+  border-radius: 8px;
+  padding: .75rem 1rem;
+  font-size: .82rem;
+  color: var(--fg);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.db-notice svg { flex-shrink: 0; color: var(--amber); margin-top: 1px; }
+</style>
+
+<!-- Logos bar top -->
+<div style="background:#fff;border-bottom:1px solid #E3E0D8;padding:.9rem max(24px, env(safe-area-inset-left,0px));margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px, env(safe-area-inset-right,0px)));">
+  <div style="max-width:680px;margin:0 auto;display:flex;align-items:center;flex-wrap:nowrap;gap:1.5rem;overflow-x:auto;">
+    <!-- SAWARA -->
+    <div style="display:flex;flex-direction:column;line-height:1.1;">
+      <span style="font-family:'Sora',sans-serif;font-weight:900;font-size:1.25rem;color:#0B1F6B;letter-spacing:-.02em;">sawara<span style="color:#E8900A;">◂</span></span>
+      <span style="font-size:.55rem;font-weight:500;color:#6B6560;letter-spacing:.04em;text-transform:uppercase;">Intégrité de l'information<br>et cohésion sociale au Bénin</span>
+    </div>
+    <div style="width:1px;height:32px;background:#E3E0D8;"></div>
+    <!-- CFI -->
+    <div style="display:flex;align-items:center;gap:7px;">
+      <div style="background:#0B1F6B;color:#fff;font-family:'Sora',sans-serif;font-weight:900;font-size:.9rem;padding:.25rem .5rem;border-radius:3px;letter-spacing:.02em;">CFI</div>
+      <div style="line-height:1.15;">
+        <div style="font-size:.6rem;font-weight:700;color:#0B1F6B;text-transform:uppercase;letter-spacing:.05em;">Développement</div>
+        <div style="font-size:.6rem;font-weight:700;color:#0B1F6B;text-transform:uppercase;letter-spacing:.05em;">Médias</div>
+      </div>
+    </div>
+    <div style="width:1px;height:32px;background:#E3E0D8;"></div>
+    <!-- EU -->
+    <div style="display:flex;align-items:center;gap:7px;">
+      <div style="width:30px;height:30px;border-radius:50%;background:#003399;display:flex;align-items:center;justify-content:center;font-size:.85rem;">🇪🇺</div>
+      <div style="line-height:1.2;">
+        <div style="font-size:.6rem;color:#6B6560;">Financé par</div>
+        <div style="font-size:.65rem;font-weight:700;color:#003399;">l'Union européenne</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<div class="header-band" id="main-header">
+  <div class="header-inner">
+    <div class="orgs">
+      <span class="org-badge">SAWARA</span>
+      <span class="org-sep">×</span>
+      <span class="org-badge">CFI</span>
+    </div>
+    <div class="eyebrow">Appel à candidatures</div>
+    <h1>Premier Comité d'écoute<br>des jeunes</h1>
+    <p class="header-desc">Rejoignez un groupe de jeunes qui contribuent à améliorer les contenus médias sur l'intégrité de l'information et la cohésion sociale en Afrique francophone.</p>
+    <div class="deadline-pill">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Date limite : 26 octobre 2026 à 23h59
+    </div>
+  </div>
+</div>
+
+<!-- Info strip -->
+<div class="info-strip" id="main-infostrip">
+  <div class="info-strip-inner">
+    <div class="info-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      9 et 10 novembre 2026
+    </div>
+    <div class="info-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Parakou, Bénin
+    </div>
+    <div class="info-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Jeunes de 15 à 35+ ans
+    </div>
+  </div>
+</div>
+
+<!-- Main form view -->
+<div class="main" id="form-view">
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progress-wrap">
+    <div class="steps-row">
+      <div class="step-dot active" id="dot-1">1</div>
+      <div class="step-line" id="line-1"></div>
+      <div class="step-dot" id="dot-2">2</div>
+      <div class="step-line" id="line-2"></div>
+      <div class="step-dot" id="dot-3">3</div>
+      <div class="step-line" id="line-3"></div>
+      <div class="step-dot" id="dot-4">4</div>
+    </div>
+    <div class="steps-labels">
+      <span class="step-label active" id="lbl-1">Vous</span>
+      <span class="step-label" id="lbl-2">Médias</span>
+      <span class="step-label" id="lbl-3">Vision</span>
+      <span class="step-label" id="lbl-4">Engag.</span>
+    </div>
+  </div>
+
+  <form id="form" novalidate>
+
+    <!-- STEP 1 — Informations personnelles -->
+    <div class="card visible" id="step-1">
+      <div class="card-head">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Informations personnelles</div>
+          <div class="card-subtitle">Étape 1 sur 4 · Vos coordonnées</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="nom">Nom complet <span class="req">*</span></label>
+        <input type="text" id="nom" name="nom" placeholder="Prénom et nom de famille" autocomplete="name">
+        <div class="field-error" id="err-nom">Veuillez saisir votre nom complet.</div>
+      </div>
+
+      <div class="field">
+        <label for="email">Adresse e-mail <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="exemple@email.com" autocomplete="email">
+        <div class="field-error" id="err-email">Veuillez saisir une adresse e-mail valide.</div>
+      </div>
+
+      <div class="field">
+        <label for="whatsapp">Numéro WhatsApp <span class="req">*</span> <span class="hint">(avec indicatif pays)</span></label>
+        <input type="tel" id="whatsapp" name="whatsapp" placeholder="+229 XX XX XX XX" autocomplete="tel">
+        <div class="field-error" id="err-whatsapp">Veuillez saisir votre numéro WhatsApp.</div>
+      </div>
+
+      <div class="field">
+        <label for="age">Tranche d'âge <span class="req">*</span></label>
+        <select id="age" name="age">
+          <option value="">Sélectionnez</option>
+          <option>15 à 19 ans</option>
+          <option>20 à 24 ans</option>
+          <option>25 à 29 ans</option>
+          <option>30 à 34 ans</option>
+          <option>35 ans et plus</option>
+        </select>
+        <div class="field-error" id="err-age">Veuillez sélectionner votre tranche d'âge.</div>
+      </div>
+
+      <div class="field">
+        <label for="commune">Commune de résidence <span class="req">*</span></label>
+        <select id="commune" name="commune">
+          <option value="">Sélectionnez</option>
+          <option>Parakou</option>
+          <option>Cotonou</option>
+          <option>Abomey-Calavi</option>
+          <option>Porto-Novo</option>
+          <option>Bohicon</option>
+          <option>Djougou</option>
+          <option>Kandi</option>
+          <option>Lokossa</option>
+          <option>Natitingou</option>
+          <option>Ouidah</option>
+          <option>Savalou</option>
+          <option>Tchaourou</option>
+          <option>Autre</option>
+        </select>
+        <div class="field-error" id="err-commune">Veuillez sélectionner votre commune.</div>
+      </div>
+
+      <div class="field">
+        <label for="profession">Profession / Occupation actuelle <span class="req">*</span></label>
+        <input type="text" id="profession" name="profession" placeholder="Étudiant(e), entrepreneur(e), enseignant(e)…">
+        <div class="field-error" id="err-profession">Veuillez indiquer votre occupation.</div>
+      </div>
+
+      <div class="nav-row">
+        <span></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep(1)">
+          Continuer
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2 — Consommation des médias -->
+    <div class="card" id="step-2">
+      <div class="card-head">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.18 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8a16 16 0 0 0 6 6l.27-.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Habitudes médias</div>
+          <div class="card-subtitle">Étape 2 sur 4 · Comment vous informez-vous ?</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Plateformes et médias que vous utilisez au quotidien <span class="req">*</span></label>
+        <div class="check-grid" id="medias-grid">
+          <label class="check-item">
+            <input type="checkbox" name="medias" value="Réseaux sociaux (Facebook, TikTok, Instagram…)">
+            <span class="check-box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+            <span class="check-text">Réseaux sociaux</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="medias" value="Radio">
+            <span class="check-box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+            <span class="check-text">Radio</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="medias" value="Télévision / Presse écrite">
+            <span class="check-box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+            <span class="check-text">TV / Presse</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="medias" value="Podcasts">
+            <span class="check-box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+            <span class="check-text">Podcasts</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="medias" value="WhatsApp / Messageries">
+            <span class="check-box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+            <span class="check-text">WhatsApp</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="medias" value="Autre">
+            <span class="check-box"><svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+            <span class="check-text">Autre</span>
+          </label>
+        </div>
+        <div class="field-error" id="err-medias">Sélectionnez au moins un média.</div>
+      </div>
+
+      <div class="field">
+        <label for="reseaux">Liens vers vos profils actifs sur les réseaux sociaux <span class="hint">(facultatif)</span></label>
+        <textarea id="reseaux" name="reseaux" placeholder="Facebook : https://…&#10;TikTok : https://…"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Possédez-vous un smartphone avec accès à Internet ? <span class="req">*</span></label>
+        <div class="radio-stack" id="smartphone-group">
+          <label class="radio-item">
+            <input type="radio" name="smartphone" value="Oui">
+            <span class="radio-dot"><span class="radio-inner"></span></span>
+            <span class="radio-text">Oui</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="smartphone" value="Non">
+            <span class="radio-dot"><span class="radio-inner"></span></span>
+            <span class="radio-text">Non</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="smartphone" value="Parfois">
+            <span class="radio-dot"><span class="radio-inner"></span></span>
+            <span class="radio-text">Parfois / Accès partagé</span>
+          </label>
+        </div>
+        <div class="field-error" id="err-smartphone">Veuillez répondre à cette question.</div>
+      </div>
+
+      <div class="nav-row">
+        <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Retour
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+          Continuer
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3 — Vision & motivation -->
+    <div class="card" id="step-3">
+      <div class="card-head">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Vision & motivation</div>
+          <div class="card-subtitle">Étape 3 sur 4 · Vos idées sur l'information</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="motivation">Pourquoi souhaitez-vous rejoindre ce comité ? <span class="req">*</span></label>
+        <textarea id="motivation" name="motivation" placeholder="Partagez vos motivations en quelques phrases…" style="min-height:120px;"></textarea>
+        <div class="field-error" id="err-motivation">Veuillez expliquer votre motivation (minimum 30 caractères).</div>
+      </div>
+
+      <div class="field">
+        <label for="bon-contenu">Selon vous, qu'est-ce qui fait un bon contenu d'information pour les jeunes ? <span class="req">*</span></label>
+        <textarea id="bon-contenu" name="bon-contenu" placeholder="Accessibilité, format, ton, thèmes… donnez votre point de vue." style="min-height:100px;"></textarea>
+        <div class="field-error" id="err-bon-contenu">Veuillez répondre à cette question (minimum 20 caractères).</div>
+      </div>
+
+      <div class="field">
+        <label for="whatsapp-info">Avant de partager une information alarmante reçue sur WhatsApp, que faites-vous ? <span class="req">*</span></label>
+        <textarea id="whatsapp-info" name="whatsapp-info" placeholder="Décrivez votre réaction habituelle…" style="min-height:90px;"></textarea>
+        <div class="field-error" id="err-whatsapp-info">Veuillez répondre à cette question.</div>
+      </div>
+
+      <div class="field">
+        <label for="cohesion">Que savez-vous sur la cohésion sociale ? <span class="req">*</span></label>
+        <textarea id="cohesion" name="cohesion" placeholder="Définition, exemples, enjeux dans votre communauté…" style="min-height:90px;"></textarea>
+        <div class="field-error" id="err-cohesion">Veuillez répondre à cette question.</div>
+      </div>
+
+      <div class="nav-row">
+        <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Retour
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+          Continuer
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 4 — Disponibilité & engagements -->
+    <div class="card" id="step-4">
+      <div class="card-head">
+        <div class="card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div>
+          <div class="card-title">Disponibilité & engagements</div>
+          <div class="card-subtitle">Étape 4 sur 4 · Dernière étape</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Êtes-vous disponible pour les deux jours (9 et 10 novembre à Parakou) ? <span class="req">*</span></label>
+        <div class="radio-stack" id="dispo-group">
+          <label class="radio-item">
+            <input type="radio" name="disponibilite" value="Oui, les deux jours">
+            <span class="radio-dot"><span class="radio-inner"></span></span>
+            <span class="radio-text">Oui, les deux jours</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="disponibilite" value="Un seul jour">
+            <span class="radio-dot"><span class="radio-inner"></span></span>
+            <span class="radio-text">Un seul jour seulement</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="disponibilite" value="Non disponible">
+            <span class="radio-dot"><span class="radio-inner"></span></span>
+            <span class="radio-text">Non disponible</span>
+          </label>
+        </div>
+        <div class="field-error" id="err-dispo">Veuillez indiquer votre disponibilité.</div>
+      </div>
+
+      <div class="field">
+        <label style="font-size:.85rem;font-weight:600;color:var(--fg);margin-bottom:.75rem;display:block;">Consentements <span class="req">*</span></label>
+
+        <div class="consent-card">
+          <div class="consent-label">J'accepte que mes données personnelles soient utilisées dans le cadre du projet SAWARA.</div>
+          <div class="consent-opts">
+            <label class="consent-opt"><input type="radio" name="consent-data" value="Oui"> Oui</label>
+            <label class="consent-opt"><input type="radio" name="consent-data" value="Non"> Non</label>
+          </div>
+        </div>
+
+        <div class="consent-card">
+          <div class="consent-label">J'accepte de rejoindre la communauté en ligne WhatsApp du comité d'écoute.</div>
+          <div class="consent-opts">
+            <label class="consent-opt"><input type="radio" name="consent-whatsapp" value="Oui"> Oui</label>
+            <label class="consent-opt"><input type="radio" name="consent-whatsapp" value="Non"> Non</label>
+          </div>
+        </div>
+
+        <div class="consent-card">
+          <div class="consent-label">Je certifie que toutes les informations fournies sont exactes et sincères.</div>
+          <div class="consent-opts">
+            <label class="consent-opt"><input type="radio" name="consent-certif" value="Oui"> Oui</label>
+            <label class="consent-opt"><input type="radio" name="consent-certif" value="Non"> Non</label>
+          </div>
+        </div>
+        <div class="field-error" id="err-consent">Veuillez répondre aux trois consentements.</div>
+      </div>
+
+      <div class="field">
+        <label for="commentaires">Commentaires ou suggestions <span class="hint">(facultatif)</span></label>
+        <textarea id="commentaires" name="commentaires" placeholder="Une remarque, une question…"></textarea>
+      </div>
+
+      <div class="nav-row">
+        <button type="button" class="btn btn-secondary" onclick="prevStep(4)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Retour
+        </button>
+        <button type="submit" class="btn btn-submit" id="submit-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Soumettre ma candidature
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- Success -->
+  <div id="success-screen">
+    <div class="success-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="success-title">Candidature soumise avec succès !</div>
+    <p class="success-text">Merci d'avoir postulé pour rejoindre le premier Comité d'écoute SAWARA. Votre dossier a bien été enregistré.</p>
+    <div class="success-detail">
+      <p><strong>Prochaine étape :</strong> L'équipe CFI examinera votre candidature et vous contactera par e-mail ou WhatsApp avant le <strong>5 novembre 2026</strong>.</p>
+      <p><strong>Rendez-vous :</strong> Les journées de réunion se tiennent les 9 et 10 novembre 2026 à Parakou.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════ ADMIN DASHBOARD ════════ -->
+<div class="main" id="admin-view">
+  <div class="admin-header">
+    <div>
+      <div class="admin-title">Tableau de bord — Candidatures SAWARA</div>
+      <div class="admin-subtitle" id="admin-last-update">Chargement des données…</div>
+    </div>
+    <button class="btn btn-secondary" onclick="refreshDashboard()" id="refresh-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      Actualiser
+    </button>
+  </div>
+
+  <div id="admin-content">
+    <div class="admin-loading">Chargement des statistiques…</div>
+  </div>
+</div>
+
+<!-- Partners bar -->
+<div id="partners-bar" style="background:var(--surface);border-top:1px solid var(--border);padding:1rem max(24px, env(safe-area-inset-left,0px));margin-left:calc(-1 * max(16px, env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px, env(safe-area-inset-right,0px)));">
+  <div style="max-width:680px;margin:0 auto;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.5rem;">
+      <img src="data:image/jpeg;base64,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" alt="Partenaires médias" style="width:100%;max-width:680px;display:block;">
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Les données collectées sont traitées conformément à la politique de confidentialité du projet SAWARA.
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════════════
+   ROUTER — #admin vs formulaire
+   ════════════════════════════════════════════════════════════════════════ */
+const isAdmin = () => window.location.hash === '#admin';
+
+function showView() {
+  const admin = isAdmin();
+  document.getElementById('form-view').style.display = admin ? 'none' : 'block';
+  document.getElementById('admin-view').style.display = admin ? 'block' : 'none';
+  document.getElementById('main-header').style.display = admin ? 'none' : '';
+  document.getElementById('main-infostrip').style.display = admin ? 'none' : '';
+  document.getElementById('partners-bar').style.display = admin ? 'none' : '';
+  if (admin) initAdmin();
+}
+
+window.addEventListener('hashchange', showView);
+window.addEventListener('DOMContentLoaded', showView);
+
+/* ════════════════════════════════════════════════════════════════════════
+   FORMULAIRE — multi-étapes
+   ════════════════════════════════════════════════════════════════════════ */
+let current = 1;
+const total = 4;
+
+function setStep(n) {
+  for (let i = 1; i <= total; i++) {
+    document.getElementById('step-' + i).classList.toggle('visible', i === n);
+    const dot = document.getElementById('dot-' + i);
+    const lbl = document.getElementById('lbl-' + i);
+    dot.className = 'step-dot' + (i < n ? ' done' : i === n ? ' active' : '');
+    if (i < n) {
+      dot.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>';
+    } else {
+      dot.textContent = i;
+    }
+    lbl.className = 'step-label' + (i < n ? ' done' : i === n ? ' active' : '');
+    if (i < total) {
+      document.getElementById('line-' + i).className = 'step-line' + (i < n ? ' done' : '');
+    }
+  }
+  current = n;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validateStep(n) {
+  let ok = true;
+  function err(id, show) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('show', show);
+    if (show) ok = false;
+  }
+  function markField(id, invalid) {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('error', invalid);
+  }
+  if (n === 1) {
+    const nom = document.getElementById('nom').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const wa = document.getElementById('whatsapp').value.trim();
+    const age = document.getElementById('age').value;
+    const commune = document.getElementById('commune').value;
+    const prof = document.getElementById('profession').value.trim();
+    err('err-nom', !nom); markField('nom', !nom);
+    err('err-email', !email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)); markField('email', !email || !/^[^@]+@[^@]+\.[^@]+$/.test(email));
+    err('err-whatsapp', !wa); markField('whatsapp', !wa);
+    err('err-age', !age); markField('age', !age);
+    err('err-commune', !commune); markField('commune', !commune);
+    err('err-profession', !prof); markField('profession', !prof);
+  }
+  if (n === 2) {
+    const checked = document.querySelectorAll('input[name="medias"]:checked');
+    err('err-medias', checked.length === 0);
+    const phone = document.querySelector('input[name="smartphone"]:checked');
+    err('err-smartphone', !phone);
+  }
+  if (n === 3) {
+    const mot = document.getElementById('motivation').value.trim();
+    const bc = document.getElementById('bon-contenu').value.trim();
+    const wi = document.getElementById('whatsapp-info').value.trim();
+    const coh = document.getElementById('cohesion').value.trim();
+    err('err-motivation', mot.length < 30); markField('motivation', mot.length < 30);
+    err('err-bon-contenu', bc.length < 20); markField('bon-contenu', bc.length < 20);
+    err('err-whatsapp-info', !wi); markField('whatsapp-info', !wi);
+    err('err-cohesion', !coh); markField('cohesion', !coh);
+  }
+  if (n === 4) {
+    const dispo = document.querySelector('input[name="disponibilite"]:checked');
+    err('err-dispo', !dispo);
+    const cd = document.querySelector('input[name="consent-data"]:checked');
+    const cw = document.querySelector('input[name="consent-whatsapp"]:checked');
+    const cc = document.querySelector('input[name="consent-certif"]:checked');
+    err('err-consent', !cd || !cw || !cc);
+  }
+  return ok;
+}
+
+function nextStep(n) { if (validateStep(n)) setStep(n + 1); }
+function prevStep(n) { setStep(n - 1); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   SOUMISSION — avec sauvegarde dans db
+   ════════════════════════════════════════════════════════════════════════ */
+let dbHandle = null;
+
+async function getDb() {
+  if (dbHandle) return dbHandle;
+  try {
+    dbHandle = await claude.use('db');
+  } catch(e) { dbHandle = null; }
+  return dbHandle;
+}
+
+document.getElementById('form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!validateStep(4)) return;
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Envoi en cours…';
+
+  // Collecter les données
+  const medias = Array.from(document.querySelectorAll('input[name="medias"]:checked')).map(el => el.value);
+  const submission = {
+    nom: document.getElementById('nom').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    whatsapp: document.getElementById('whatsapp').value.trim(),
+    age: document.getElementById('age').value,
+    commune: document.getElementById('commune').value,
+    profession: document.getElementById('profession').value.trim(),
+    medias: medias,
+    smartphone: (document.querySelector('input[name="smartphone"]:checked') || {}).value || '',
+    motivation: document.getElementById('motivation').value.trim(),
+    disponibilite: (document.querySelector('input[name="disponibilite"]:checked') || {}).value || '',
+    consentData: (document.querySelector('input[name="consent-data"]:checked') || {}).value || '',
+    consentWhatsapp: (document.querySelector('input[name="consent-whatsapp"]:checked') || {}).value || '',
+    submittedAt: new Date().toISOString()
+  };
+
+  // Sauvegarder dans db
+  try {
+    const db = await getDb();
+    if (db) {
+      const id = 'sub_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+      await db.doc('submissions/' + id).set(submission);
+    }
+  } catch(e) {
+    // Silencieux — on affiche le succès quand même
+  }
+
+  document.getElementById('form').style.display = 'none';
+  document.getElementById('progress-wrap').style.display = 'none';
+  const s = document.getElementById('success-screen');
+  s.removeAttribute('style');
+  s.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ════════════════════════════════════════════════════════════════════════
+   DASHBOARD ADMIN
+   ════════════════════════════════════════════════════════════════════════ */
+let dashboardLoaded = false;
+
+async function initAdmin() {
+  if (!dashboardLoaded) {
+    dashboardLoaded = true;
+    await refreshDashboard();
+  }
+}
+
+async function refreshDashboard() {
+  const content = document.getElementById('admin-content');
+  content.innerHTML = '<div class="admin-loading">Chargement des statistiques…</div>';
+  document.getElementById('admin-last-update').textContent = 'Actualisation…';
+
+  try {
+    const db = await getDb();
+    if (!db) {
+      content.innerHTML = '<div class="db-notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>La base de données n\'est pas disponible dans cette session. Soumettez d\'abord des candidatures depuis le formulaire pour voir les statistiques.</div>';
+      return;
+    }
+
+    const col = db.collection('submissions');
+    const snap = await col.limit(1000).get();
+    const docs = snap.docs || [];
+    const all = docs.map(d => d.data());
+
+    const n = all.length;
+    document.getElementById('admin-last-update').textContent = 'Dernière actualisation : ' + new Date().toLocaleTimeString('fr-FR');
+
+    if (n === 0) {
+      content.innerHTML = '<div class="admin-empty"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg><p>Aucune candidature pour l\'instant.</p></div>';
+      return;
+    }
+
+    // ── Statistiques agrégées ──────────────────────────────────────────
+    function count(arr, key) {
+      const m = {};
+      arr.forEach(r => {
+        const v = r[key] || 'Non renseigné';
+        m[v] = (m[v] || 0) + 1;
+      });
+      return Object.entries(m).sort((a, b) => b[1] - a[1]);
+    }
+
+    function countMulti(arr, key) {
+      const m = {};
+      arr.forEach(r => {
+        const vals = r[key] || [];
+        (Array.isArray(vals) ? vals : [vals]).forEach(v => {
+          if (v) m[v] = (m[v] || 0) + 1;
+        });
+      });
+      return Object.entries(m).sort((a, b) => b[1] - a[1]);
+    }
+
+    // Taux disponibilité
+    const dispoDeux = all.filter(r => r.disponibilite === 'Oui, les deux jours').length;
+    const consentOui = all.filter(r => r.consentData === 'Oui').length;
+
+    // Dernières candidatures
+    const recent = [...all]
+      .sort((a, b) => new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0))
+      .slice(0, 10);
+
+    // ── HTML ──────────────────────────────────────────────────────────
+    content.innerHTML = `
+      <!-- Tuiles summary -->
+      <div class="stat-row">
+        <div class="stat-tile">
+          <div class="stat-value">${n}</div>
+          <div class="stat-label">Candidatures reçues</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-value">${Math.round(dispoDeux/n*100)}%</div>
+          <div class="stat-label">Disponibles 2 jours</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-value">${Math.round(consentOui/n*100)}%</div>
+          <div class="stat-label">Consentement données</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-value">${new Set(all.map(r => r.commune)).size}</div>
+          <div class="stat-label">Communes représentées</div>
+        </div>
+      </div>
+
+      <!-- Graphiques -->
+      <div class="chart-grid">
+        ${barChart('Commune de résidence', count(all, 'commune'), n, 'navy')}
+        ${barChart('Tranche d\'âge', count(all, 'age'), n, 'amber')}
+        ${barChart('Disponibilité', count(all, 'disponibilite'), n, 'success')}
+        ${barChart('Smartphone / Internet', count(all, 'smartphone'), n, 'amber')}
+        ${barChart('Plateformes médias utilisées', countMulti(all, 'medias'), n, 'navy', true)}
+      </div>
+
+      <!-- Liste récente -->
+      <div class="responses-wrap">
+        <div class="responses-title">10 dernières candidatures</div>
+        ${recent.map(r => `
+          <div class="response-row">
+            <div class="resp-name">${escHtml(r.nom || '—')}</div>
+            <div class="resp-detail">${escHtml(r.commune || '—')}</div>
+            <div><span class="resp-badge">${escHtml(r.age || '—')}</span></div>
+            <div class="resp-date">${r.submittedAt ? new Date(r.submittedAt).toLocaleDateString('fr-FR') : '—'}</div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    // Animer les barres
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.bar-fill').forEach(el => {
+        const pct = el.dataset.pct;
+        el.style.width = pct + '%';
+      });
+    });
+
+  } catch(err) {
+    content.innerHTML = '<div class="db-notice"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>Erreur lors du chargement : ' + escHtml(String(err.message || err)) + '</div>';
+  }
+}
+
+function barChart(title, entries, total, colorClass, isMulti = false) {
+  const max = entries.length ? entries[0][1] : 1;
+  const rows = entries.map(([label, count]) => {
+    const pct = Math.round(count / (isMulti ? total : total) * 100);
+    const barPct = Math.round(count / max * 100);
+    return `
+      <div class="bar-item">
+        <div class="bar-label-row">
+          <span class="bar-label">${escHtml(label)}</span>
+          <span class="bar-count">${count} (${pct}%)</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill ${colorClass}" style="width:0%" data-pct="${barPct}"></div>
+        </div>
+      </div>`;
+  }).join('');
+  return `
+    <div class="chart-card">
+      <div class="chart-title">${escHtml(title)}</div>
+      ${rows || '<div style="color:var(--muted);font-size:.85rem;">Aucune donnée</div>'}
+    </div>`;
+}
+
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
